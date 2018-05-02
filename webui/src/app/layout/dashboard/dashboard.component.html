@@ -1,0 +1,85 @@
+<div [@routerTransition]>
+    <h2 class="text-muted">Dashboard <small>Statistics Overview</small></h2>
+    <!-- <div class="row">
+        <div class="col-md-12">
+            <ngb-carousel>
+                <ng-template ngbSlide *ngFor="let slider of sliders">
+                    <img class="img-fluid mx-auto d-block" [src]="slider.imagePath" alt="Random first slide" width="100%">
+                    <div class="carousel-caption">
+                        <h3>{{slider.label}}</h3>
+                        <p>{{slider.text}}</p>
+                    </div>
+                </ng-template>
+            </ngb-carousel>
+        </div>
+    </div>
+    <hr> -->
+    <div class="row">
+        <div class="col-xl-3 col-lg-6">
+            <app-stat [bgClass]="'primary'" [icon]="'fa-users'" [count]="userCount" [label]="'Users'"></app-stat>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+            <app-stat [bgClass]="'warning'" [icon]="'fa-tags'" [count]="tagCount" [label]="'Tags'"></app-stat>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+            <app-stat [bgClass]="'info'" [icon]="'fa-tasks'" [count]="groupCount" [label]="'Groups'"></app-stat>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+            <app-stat [bgClass]="'danger'" [icon]="'fa-line-chart'" [count]="activityCount" [label]="'Activities'"></app-stat>
+        </div>
+    </div>    
+    <!-- <a class="btn btn-default" href="http://localhost:4200/admin/verifyuser?key=QWERRTyuiR" target='_blank'>Verify User</a> -->
+
+    <div class="row dasboardMargins">
+
+        <!-- /.col-lg-8 -->
+        <div class="col-lg-8">
+            <line-chart-demo></line-chart-demo>
+        </div>
+        <div class="col-lg-4 pull-right">
+            <div class="card card-default mb-3">
+                <div class="card-header">
+                    <i class="fa fa-bell fa-fw"></i> Recent Users
+                </div>
+                <div class="card-body"> <!-- [routerLink]="['/users/details/',user.id]" -->
+                    <div class="list-group">
+                        <ul *ngIf="users.length > 0">
+                            <li *ngFor="let user of users;let i=index;" style="margin-top: 5px;">
+                                <a href="javascript:void(0)" class="list-group-item clearfix d-block">
+                                    <i class="fa fa-user fa-fw"></i> {{user.firstName+" "+user.lastName+" "}}
+                                    <span class="float-right text-muted small"><em>{{user.createdAt | date:'mediumDate'}}</em></span>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul *ngIf="users.length == 0">No Record Found</ul>
+                    </div>
+                    <!-- /.list-group [routerLink]="['/users']" -->
+                    <a href="javascript:void(0)" class="btn btn-default btn-block">View All Users</a>
+                </div>
+            </div>
+            <div class="card card-default mb-3">
+                <div class="card-header">
+                    <i class="fa fa-bell fa-fw"></i> Activity Log
+                </div>
+                <div class="card-body">
+                    <div class="list-group">
+                        <ul *ngIf="userActivity.length > 0">
+                            <li *ngFor="let activity of userActivity;let i=index;" style="margin-top: 5px;">
+                                <a href="#" class="list-group-item clearfix d-block">
+                                    <i class="fa fa-clock-o fa-fw"></i> {{activity.activityname+" "}}
+                                    <span class="float-right text-muted small">By-<em>{{activity.userIs}}</em></span>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul *ngIf="userActivity.length == 0">No Record Found</ul>
+                    </div>
+                    <!-- /.list-group -->
+                    <a [routerLink]="['/activity-log']" class="btn btn-default btn-block" *ngIf="userActivity.length > 0">View All Activities</a>
+                </div>
+
+            </div>
+        </div>
+        <!-- /.col-lg-4 -->
+        <!-- </div> -->
+    </div>
+</div>

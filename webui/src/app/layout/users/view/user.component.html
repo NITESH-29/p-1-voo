@@ -1,0 +1,59 @@
+<!-- <app-page-header [heading]="'Users Detail'" [icon]="'fa-user'"></app-page-header> -->
+<div class="row">
+    <div class="col-xl-12">
+        <h2 class="page-header">
+            User's Detail
+        </h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <i class="fa fa-dashboard"></i> <a href="Javascript:void(0)" [routerLink]="['/dashboard']">Dashboard</a>
+                <i class="fa fa fa-users"></i> <a href="Javascript:void(0)" [routerLink]="['/users']">User</a>
+            </li>
+            <li class="breadcrumb-item active"><i class="fa fa-user"></i> User's detail</li>
+        </ol>
+    </div>
+</div>
+<div id="page-wrapper" style="min-height: 306px;">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- /.col-lg-12 -->
+            <div class="col-sm-12">
+                <div class="row">
+                    <label class="col-sm-4">First Name :</label>
+                    <p class="col-sm-8">{{userData?.firstName}}</p>
+                </div>
+                <div class="row">
+                    <label class="col-sm-4">Last Name :</label>
+                    <p class="col-sm-8">{{userData?.lastName}}</p>
+                </div>
+                <div class="row">
+                    <label class="col-sm-4">Email :</label>
+                    <p class="col-sm-8">{{userData?.email}}</p>
+                </div>
+                <div class="row">
+                    <label class="col-sm-4">Address :</label>
+                    <p class="col-sm-8">{{userData?.address}}</p>
+                </div>
+                <div class="row">
+                    <label class="col-sm-4">Status :</label>
+                    <p class="col-sm-8">{{userData?.status==false?'Active':'In-Active'}}</p>
+                </div>
+                <div class="row">
+                    <label class="col-sm-4">Country :</label>
+                    <p class="col-sm-8">{{userData?.country}}</p>
+                </div>
+                <div class="row">
+                    <label class="col-sm-4">Mobile # :</label>
+                    <p class="col-sm-8">{{userData?.mobile_no}}</p>
+                </div>
+                <div class="row">
+                    <label class="col-sm-4">Gender :</label>
+                    <p class="col-sm-8">{{userData?.gender == 1?'Male':'Female'}}</p>
+                </div>
+            </div>
+            <button class="btn btn-primary" [routerLink]="['/users']"><i class="fa fa-angle-double-left" area-hidden="true"></i>  Back</button>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</div>

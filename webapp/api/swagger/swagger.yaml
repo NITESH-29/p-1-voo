@@ -1,0 +1,1057 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: VooZuu App
+# during dev, should point to your local machine
+host: localhost:10010
+# host: 52.34.207.5:5110 # Staging
+# basePath prefixes all resource paths 
+basePath: /
+# 
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+  # Mobile API
+  /api/register:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: auth_ctrl
+    post:
+      tags: ['Auth Module']
+      description: User Sign Up
+      summary:  User Sign Up
+      # used as the method name of the controller
+      operationId: register
+      parameters:
+        - name: body
+          in: body
+          description:  User Sign Up
+          schema:
+           $ref: '#/definitions/register'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"      
+  /api/login:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: auth_ctrl
+    post:
+      tags: ['Auth Module']
+      description: User Sign In
+      summary: User Sign In
+      # used as the method name of the controller
+      operationId: login
+      parameters:
+        - name: body
+          in: body
+          description: User Sign In
+          schema:
+           $ref: '#/definitions/login'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/logOut:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: auth_ctrl
+    post:
+      tags: ['Auth Module']
+      description: User Log Out
+      summary: User Log Out
+      # used as the method name of the controller
+      operationId: logOut
+      parameters:
+        - name: body
+          in: body
+          description:  User Log Out
+          schema:
+           $ref: '#/definitions/logOut'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/forgotPassword:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: auth_ctrl
+    post:
+      tags: ['Auth Module']
+      description: User Forgot Password
+      summary: User Forgot Password
+      # used as the method name of the controller
+      operationId: forgotPassword
+      parameters:
+        - name: body
+          in: body
+          description: Forgot Password
+          schema:
+           $ref: '#/definitions/forgotPassword'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/resetPassword:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: auth_ctrl
+    post:
+      tags: ['Auth Module']
+      description: Admin Reset Password
+      summary: Admin Reset Password
+      # used as the method name of the controller
+      operationId: resetPassword
+      parameters:
+        - name: body
+          in: body
+          description: Reset Password
+          schema:
+           $ref: '#/definitions/resetPassword'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/activation/{token}:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: auth_ctrl
+    get:
+      tags: ['Auth Module']
+      description: User Activation By Id
+      summary: User Activation By Id
+      # used as the method name of the controller
+      operationId: activation
+      parameters:
+        - in: path
+          name: token
+          description: The user id
+          required: true
+          type: string              
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"                         
+  /api/loggedin:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: auth_ctrl
+    get:
+      tags: ['Auth Module']
+      description: To check admin loggedin or not
+      summary: To check admin loggedin or not
+      # used as the method name of the controller
+      operationId: loggedin   
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"  
+  /api/updateProfile:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: user_ctrl
+    post:
+      tags: ['User Module']
+      description: Update User Profile Info
+      summary: Update User Profile Info
+      # used as the method name of the controller
+      operationId: updateProfile
+      parameters:
+        - name: body
+          in: body
+          description: Update User Profile Info
+          schema:
+           $ref: '#/definitions/updateProfile'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/changePassword:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: user_ctrl
+    post:
+      tags: ['User Module']
+      description: Change User Password
+      summary: Change User Password
+      # used as the method name of the controller
+      operationId: changePassword
+      parameters:
+        - name: body
+          in: body
+          description: Change User Password
+          schema:
+           $ref: '#/definitions/changePassword'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  #Admin API
+  /api/adminLoggedin:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: adminAuth_ctrl
+    get:
+      tags: ['Admin Auth Module']
+      description: To check admin loggedin or not
+      summary: To check admin loggedin or not
+      # used as the method name of the controller
+      operationId: adminLoggedin   
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/adminLogin:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: adminAuth_ctrl
+    post:
+      tags: ['Admin Auth Module']
+      description: Admin login
+      summary:  Admin login
+      # used as the method name of the controller
+      operationId: adminLogin
+      parameters:
+        - name: body
+          in: body
+          description:  Admin login
+          schema:
+           $ref: '#/definitions/adminLogin'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/adminForgotPassword:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: adminAuth_ctrl
+    post:
+      tags: ['Admin Auth Module']
+      description: Admin Forgot Password
+      summary: Admin Forgot Password
+      # used as the method name of the controller
+      operationId: adminForgotPassword
+      parameters:
+        - name: body
+          in: body
+          description: Forgot Password
+          schema:
+           $ref: '#/definitions/forgotPassword'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/adminResetPassword:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: adminAuth_ctrl
+    post:
+      tags: ['Admin Auth Module']
+      description: Admin Reset Password
+      summary: Admin Reset Password
+      # used as the method name of the controller
+      operationId: adminResetPassword
+      parameters:
+        - name: body
+          in: body
+          description: Reset Password
+          schema:
+           $ref: '#/definitions/resetPassword'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getAdminDashboardCount:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: adminDashboard_ctrl
+    get:
+      tags: ['Admin Dashboard Module']
+      description: Get Admin Dashboard Count
+      summary: Get Admin Dashboard Count
+      # used as the method name of the controller
+      operationId: getAdminDashboardCount
+      parameters:
+        - name: Authorization
+          in: header
+          description: Authorization
+          required: true
+          type: string    
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getAdminDashboardGraphCount:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: adminDashboard_ctrl
+    get:
+      tags: ['Admin Dashboard Module']
+      description: Get Admin Dashboard Graph Count
+      summary: Get Admin Dashboard Graph Count
+      # used as the method name of the controller
+      operationId: getAdminDashboardGraphCount
+      parameters:
+        - name: Authorization
+          in: header
+          description: Authorization
+          required: true
+          type: string    
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getAdminDashboardRecentUsers:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: adminDashboard_ctrl
+    get:
+      tags: ['Admin Dashboard Module']
+      description: Get Admin Dashboard Recent Users
+      summary: Get Admin Dashboard Recent Users
+      # used as the method name of the controller
+      operationId: getAdminDashboardRecentUsersList
+      parameters:
+        - name: Authorization
+          in: header
+          description: Authorization
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getAdminDashboardRecentActivities:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: adminDashboard_ctrl
+    get:
+      tags: ['Admin Dashboard Module']
+      description: Get Admin Dashboard Count
+      summary: Get Admin Dashboard Count
+      # used as the method name of the controller
+      operationId: getAdminDashboardRecentActivitiesList
+      parameters:
+        - name: Authorization
+          in: header
+          description: Authorization
+          required: true
+          type: string    
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  #Admin Users
+  /api/getAdminUsersList:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: adminUsers_ctrl
+    post:
+      tags: ['Admin User Module']
+      description: Get Admin All Users List
+      summary: Get Admin All Users List
+      # used as the method name of the controller
+      operationId: getAdminUsersList
+      parameters:        
+        - name: body
+          in: body
+          description: Get Admin All Users List
+          schema:
+           $ref: '#/definitions/getUsersList'
+          required: true
+        - name: Authorization
+          in: header
+          description: Authorization
+          required: true
+          type: string      
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getAdminUserView/{userId}:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: adminUsers_ctrl
+    get:
+      tags: ['Admin User Module']
+      description: Get User By user Id 
+      summary: Get User By user Id 
+      # used as the method name of the controller
+      operationId: getAdminUserView
+      parameters:
+        - name: userId
+          in: path
+          description: user Id
+          required: true
+          type: string        
+        - name: Authorization
+          in: header
+          description: Authorization
+          required: true
+          type: string    
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/changeUserStatus:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: adminUsers_ctrl
+    post:
+      tags: ['Admin User Module']
+      description: Update User status
+      summary: Update User status
+      # used as the method name of the controller
+      operationId: changeUserStatus
+      parameters:
+        - name: body
+          in: body
+          description: Update User status
+          schema:
+           $ref: '#/definitions/changeUserStatus'
+          required: true
+        - name: Authorization
+          in: header
+          description: Authorization
+          required: true
+          type: string        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/bulkUpdate:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: adminUsers_ctrl
+    post:
+      tags: ['Admin User Module']
+      description: Update multipls Users status
+      summary: Update multiple Users status
+      # used as the method name of the controller
+      operationId: bulkUpdate
+      parameters:
+        - name: body
+          in: body
+          description: Update multiple User status
+          schema:
+           $ref: '#/definitions/bulkUpdate'
+          required: true
+        - name: Authorization
+          in: header
+          description: Authorization
+          required: true
+          type: string        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  #Admin profile
+  /api/getAdminById/{id}:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: adminAuth_ctrl
+    get:
+      tags: ['Admin Auth Module']
+      description: Get Admin By Id 
+      summary:  Get Admin By Id 
+      # used as the method name of the controller
+      operationId: getAdminById      
+      parameters:
+        - name: id
+          in: path
+          description: Id
+          required: true
+          type: string        
+        - name: Authorization
+          in: header
+          description: Authorization
+          required: true
+          type: string                         
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/adminProfileUpdate:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: adminAuth_ctrl
+    post:
+      tags: ['Admin Auth Module']
+      description: Update Admin Profile Info
+      summary: Update Admin Profile Info
+      # used as the method name of the controller
+      operationId: adminProfileUpdate
+      parameters:
+        - name: body
+          in: body
+          description: Update User Profile Info
+          schema:
+           $ref: '#/definitions/adminProfileUpdate'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/adminChangePassword:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: adminAuth_ctrl
+    post:
+      tags: ['Admin Auth Module']
+      description: Change User Password
+      summary: Change User Password
+      # used as the method name of the controller
+      operationId: adminChangePassword
+      parameters:
+        - name: body
+          in: body
+          description: Change User Password
+          schema:
+           $ref: '#/definitions/adminChangePassword'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/adminUpdateImage:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: adminAuth_ctrl
+    post:
+      tags: ['Admin Auth Module']
+      description: Update Admin Profile Pic
+      summary: Update Admin Profile Pic
+      # used as the method name of the controller
+      operationId: adminUpdateImage
+      consumes:
+        - multipart/form-data
+        - application/x-www-form-urlencoded
+        - binary
+      parameters:
+        - in: formData
+          name: id
+          description: User id
+          type: string
+          required: true                
+        - in: formData
+          name: file
+          description: Update Admin Profile Pic
+          type: file
+          required: true                      
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/users/getUserInfo/{userId}:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users
+    get:
+      tags: ['User Module']
+      description: Returns the user's info
+      # used as the method name of the controller
+      operationId: getUserInfo
+      parameters:
+        - in: path
+          name: userId
+          description: The user id
+          required: true
+          type: string        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  # save contact comes here
+  /api/contacts/saveContact:
+   # binds a127 app logic to a route
+   x-swagger-router-controller: contact_ctrl
+   post:
+      tags: ['Contact Module']
+      description: Save Contact
+      # used as the method name of the controller
+      operationId: saveContact
+      parameters:
+        - in: body
+          name: body
+          description: body
+          required: true
+          schema:
+             $ref: '#/definitions/Contacts'          
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/contacts/getContacts:
+    x-swagger-router-controller: contact_ctrl
+    get:
+      tags: ['Contact Module']
+      description: to fetch contact data
+      # used as the method name of the controller
+      operationId: getContacts
+      parameters:
+        - name: userId
+          in: query
+          description: user id
+          required: true
+          type: string        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  # save tag comes here
+  /api/tags/saveTag:
+   # binds a127 app logic to a route
+   x-swagger-router-controller: tags
+   post:
+      tags: ['Tag Module']
+      description: Save Tag
+      # used as the method name of the controller
+      operationId: saveTag
+      parameters:
+        - in: body
+          name: body
+          description: body
+          required: true
+          schema:
+             $ref: '#/definitions/Tags'          
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/tags/getTags:
+    x-swagger-router-controller: tags
+    get:
+      tags: ['Tag Module']
+      description: to fetch tag data
+      # used as the method name of the controller
+      operationId: getTags
+      parameters:
+        - name: contact_id
+          in: query
+          description: contact id
+          required: true
+          type: string        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /hello:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: hello_world
+    get:
+      description: Returns 'Hello' to the caller
+      # used as the method name of the controller
+      operationId: hello
+      parameters:
+        - name: name
+          in: query
+          description: The name of the person to whom to say hello
+          required: false
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /swagger:
+    x-swagger-pipe: swagger_raw
+# complex objects have schema definitions
+definitions:
+  HelloWorldResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+  appResponse:
+    required:
+      - code
+    properties:
+      code:
+        type: number
+      message:
+        type: string
+  ErrorResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+  register:
+    type: object
+    properties:
+      email:
+       type: string
+      password:
+       type: string
+      type:
+       type: string
+      firstName:
+       type: string
+      lastName:
+       type: string      
+      phoneNumber:
+       type: string
+  login:
+    type: object
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      deviceToken:
+        type: string
+      deviceType:
+        type: string
+  logOut:
+    type: object
+    properties:
+      email:
+        type: string
+  forgotPassword:
+    type: object
+    properties:
+      email:
+        type: string
+  resetPassword:
+    type: object
+    properties:
+      resetKey:
+        type: string
+      password:
+        type: string
+  changePassword:
+    type: object
+    properties:
+      userId:
+        type: string
+      oldPassword:
+        type: string
+      newPassword:
+        type: string
+  updateProfile:
+    type: object
+    properties:
+      userId:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+  #Admin
+  adminLogin:
+    type: object
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+  adminProfileUpdate:
+    type: object
+    properties:
+      userId:
+        type: string
+      firstname:
+        type: string
+      lastname:
+        type: string
+  adminChangePassword:
+    type: object
+    properties:
+      userId:
+        type: string
+      oldPassword:
+        type: string
+      newPassword:
+        type: string  
+  changeUserStatus:   
+    type: object
+    properties:
+      id:
+        type: string
+  bulkUpdate:   
+    type: array
+    items: 
+          $ref: '#/definitions/updateMultipleUserStatus'
+  updateMultipleUserStatus:
+    type: object
+    discriminator: type  
+    properties:
+      id:
+       type: string
+      email:
+       type: string
+      field:
+       type: string
+      status:
+       type: boolean
+  getUsersList:
+    type: object
+    properties:
+      limit:
+        type: number    
+      page:
+        type: number      
+  Contacts:
+    type: array
+    items: 
+          $ref: '#/definitions/saveContact'
+  saveContact:
+    type: object
+    discriminator: type  
+    properties:
+      contactId:
+       type: string
+      userId:
+       type: string
+      fullName:
+       type: string
+      familyName:
+        type: string
+      jobTitle:
+       type: string
+      company:
+        type: string
+      phoneNumbers:
+        type: array
+        items: 
+          $ref: '#/definitions/phoneNumbers'
+      emails:
+        type: array
+        items: 
+          $ref: '#/definitions/emails'
+  Tags:
+    type: object
+    properties:
+      name:
+       type: string
+  phoneNumbers:
+    type: object
+    discriminator: type
+    properties:
+      type:
+        type: string
+      number:
+        type: string
+    required:
+      - type
+      - number
+  emails:
+    type: object
+    discriminator: type
+    properties:
+      type:
+        type: string
+      email:
+        type: string
+    required:
+      - type
+      - email

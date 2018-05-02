@@ -1,0 +1,88 @@
+<block-ui>
+    <!-- Your app markup here -->
+</block-ui>
+<div [@routerTransition]>
+    <app-page-header [heading]="'Users'" [icon]="'fa-user'"></app-page-header>
+    <div class="row">
+        <div class="col col-sm-12 align-right">
+            <button class="btn btn-success button-export" (click)="export2csv()">Export CSV</button>
+        </div>
+        <div class="col col-xl-12 col-lg-12">
+            <div class="card mb-3">
+                <div class="card-header">Users Table</div>
+                <div class="card-body table-responsive">
+                    <div class="row" style="margin-bottom:8px">
+                        <div class="col-sm-8">
+                            <input class="form-control" type="text" (input)="search($event.target.value)" name="params" [(ngModel)]="searchText" placeholder="Enter your search text here..">
+                            <!-- <span class="input-search"><a class="btn-btn-sm"><i class="fa fa-search fa-2x" area-hidden="true"></i></a></span> -->
+                        </div>
+                    </div>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th style="width:66px"><input class="form-control" style="height:25px" type="checkbox" (change)="selectAll($event)"></th>
+                                <th>First Name
+                                    <i class="fa fa-caret-up pull-right" (click)="sort('firstName','asc')" aria-hidden="true"></i>
+                                    <i class="fa fa-caret-down pull-right" (click)="sort('firstName','desc')" aria-hidden="true"></i>
+                                </th>
+                                <th>Last Name
+                                    <i class="fa fa-caret-up pull-right" (click)="sort('lastName','asc')" aria-hidden="true"></i>
+                                    <i class="fa fa-caret-down pull-right" (click)="sort('lastName','desc')" aria-hidden="true"></i>
+                                </th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Action</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of data | paginate: { id: 'foo',
+                                                      itemsPerPage: 3,
+                                                      currentPage: params.page,
+                                                      totalItems: Count }; let i = index;">
+                                <td style="width:6px"><input class="form-control" style="height:20px" type="checkbox" [(ngModel)]="user.checked"
+                                        (change)="selectOne(i)"></td>
+                                <td>{{user.firstName}}</td>
+                                <td>{{user.lastName}}</td>
+                                <td>{{user.email}}</td>
+                                <td>{{user.is_active == true?'Active':'In-Active'}}</td>
+
+                                <td>
+                                    <button class=" transparent " style="cursor:pointer " [routerLink]="[ 'details/',user._id]
+                                "><i style="font-size:1.5em " class="fa fa-eye fa-2x " aria-hidden="true "></i></button>
+                                    <button type="text " class="delete-icon transparent " (click)="confirm(user._id)
+                                " pButton icon="fa-trash "></button>
+                                    <button *ngIf="user.is_active==true " class="transparent " style="cursor:pointer
+                                " (click)="setStatus(user._id,true) "><i class="fa fa-check check-icon " aria-hidden="true "></i></button>
+                                    <button *ngIf="user.is_active==false " class="transparent " style="cursor:pointer
+                                " (click)="setStatus(user._id,false) "><i class="fa fa-close delete-icon " aria-hidden="true "></i></button>
+
+                                </td>
+                            </tr>
+                        </tbody>
+
+
+                    </table>
+                    <div class="pagination_align pull-right">
+                        <pagination-controls id="foo" (pageChange)="pageChanged($event)" maxSize="9" directionLinks="true " autoHide="true " previousLabel="Previous"
+                            nextLabel="Next" screenReaderPaginationLabel="Pagination" class="page-item active" class="page-item disabled"
+                            screenReaderPageLabel="page" screenReaderCurrentLabel="page">
+                        </pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row dropdown">
+        <div class="col-sm-3">
+            <select class="form-control" name="custom-select" (change)="takeAction($event.target.value)" #action name="action" ngModel="action">
+            <option value="" selected="selected" disabled> Select Your Choice</option>
+            <option class="dropdown-item" value="1">Delete All</option>
+            <option class="dropdown-item" value="2">Enabled</option>
+            <option class="dropdown-item" value="3">Disabled</option>
+        </select>
+        </div>
+    </div>
+</div>
+<p-confirmDialog header="Are you Sure?" icon="fa fa-question-circle" width="425" responsive=true></p-confirmDialog>

@@ -1,0 +1,30 @@
+<div class="login-page" [@routerTransition]>
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <img src="assets/images/logo.png" width="150px" class="user-avatar" />
+            <h1>LogIn</h1>
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <div class="form-content">
+                    <div class="form-group">
+                        <input type="email" formControlName="email" [(ngModel)]="Formdata.email" class="form-control input-underline input-lg" id="email"
+                            placeholder="Email *">
+                        <app-form [control]="registerForm.controls.email"></app-form>
+
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" formControlName="password" [(ngModel)]="Formdata.password" class="form-control input-underline input-lg"
+                            id="password" placeholder="Password *">
+                        <app-form [control]="registerForm.controls.password"></app-form>
+                    </div>
+                    <div class="form-group checkbox icheck  text-left mb-0">
+                        <label>
+                                <input type="checkbox"  formControlName="rememberme" [(ngModel)]="Formdata.rememberme"> Remember Me
+                            </label>
+                        <a class="pull-right" [routerLink]="['/forgotPassword']"> I forgot my Password</a>
+                    </div>
+                </div>
+                <button class="btn rounded-btn" type="submit" [disabled]="!registerForm.valid"> Log in </button>
+            </form>
+        </div>
+    </div>

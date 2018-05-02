@@ -1,0 +1,42 @@
+.check-icon {
+    color: green;
+    text-shadow: 1px 1px 1px #ccc;
+    font-size: 1.5em;
+}
+
+.delete-icon {
+    color: red;
+    text-shadow: 1px 1px 1px #ccc;
+    font-size: 1.5em;
+}
+
+.transparent {
+    background: none;
+    border: none;
+}
+
+.input-search {
+    float: right;
+    margin-right: 6px;
+    margin-top: -35px;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+    color: green;
+}
+
+.button-export {
+    padding-bottom: 0px;
+    padding-top: 0px;
+    padding-right: 9px;
+    color: whitesmoke;
+    background-color: cornflowerblue;
+}
+
+.align-right {
+    text-align: right;
+    margin-bottom: 10px
+}
+.pagination_align{
+    margin-top: 25px;
+}
